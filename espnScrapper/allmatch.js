@@ -14,7 +14,7 @@ function cb(err, res, body) {
 }
 
 function getAllMatch(url) {
-    console.log("from allmatch.js:", url);
+    // console.log("from allmatch.js:", url);
     request(url, cb);
 }
 
@@ -22,14 +22,13 @@ function extractAllMatchLink(html) {
     let selecTool = cheerio.load(html);
     let scorecardElemArr = selecTool('a[data-hover="Scorecard"]');
 
-    // console.log(scorecardElemArr.length);
-
     for (let i = 0; i < scorecardElemArr.length; i++) {
         let scorecardLink = selecTool(scorecardElemArr[i]).attr("href");
 
         let fullLink = "https://www.espncricinfo.com" + scorecardLink;
 
         gifs(fullLink);
+        break;
     }
 }
 
