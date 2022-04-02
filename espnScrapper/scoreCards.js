@@ -41,10 +41,29 @@ function getMatchDetails(html) {
 
     //------------------------->Get Innings<-------------------------
 
-    let allBatsmenRows = selecTool(".table.batsman tbody>tr");
-    console.log(selecTool(allBatsmenRows).text());
+    let allBatsmenTable = selecTool(".table.batsman tbody");
+    console.log("no of batsmen table are:", selecTool(allBatsmenTable).length);
 
-    
+    let htmlString = "";
+
+    for (let i = 0; i < allBatsmenTable.length; i++) {
+        htmlString += selecTool(allBatsmenTable[i]).html();
+        let allRows = selecTool(allBatsmenTable[i]).find("tr"); // get the descendants(table rows) of each element(table)
+
+        for (let j = 0; j < allRows.length; j++) {
+            // check to see if any of the matched elements have the given className
+            let row = selecTool(allRows[i]);
+            let firstColumnInRow = row.find("td")[0];
+
+            if (selecTool(firstColumnInRow).hasClass("batsman-cell")) {
+                //will get valid data
+                // name | runs | balls | 4's | 6's | sr
+
+                
+            }
+        }
+    }
+    console.log(htmlString);
 }
 
 module.exports = {
