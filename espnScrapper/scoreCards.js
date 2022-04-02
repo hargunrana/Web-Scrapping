@@ -42,28 +42,41 @@ function getMatchDetails(html) {
     //------------------------->Get Innings<-------------------------
 
     let allBatsmenTable = selecTool(".table.batsman tbody");
-    console.log("no of batsmen table are:", selecTool(allBatsmenTable).length);
+    console.log(
+        "no of batsmen table are:",
+        selecTool(allBatsmenTable).length,
+        "\n"
+    );
 
-    let htmlString = "";
+    // let htmlString = ""; just to extract the html file for the innings table
 
     for (let i = 0; i < allBatsmenTable.length; i++) {
-        htmlString += selecTool(allBatsmenTable[i]).html();
+        // htmlString += selecTool(allBatsmenTable[i]).html();
+
         let allRows = selecTool(allBatsmenTable[i]).find("tr"); // get the descendants(table rows) of each element(table)
 
         for (let j = 0; j < allRows.length; j++) {
             // check to see if any of the matched elements have the given className
-            let row = selecTool(allRows[i]);
+            let row = selecTool(allRows[j]);
             let firstColumnInRow = row.find("td")[0];
 
             if (selecTool(firstColumnInRow).hasClass("batsman-cell")) {
                 //will get valid data
                 // name | runs | balls | 4's | 6's | sr
+                let playerName = selecTool(row.find("td")[0]).text();
+                let runs = selecTool(row.find("td")[2]).text();
+                let balls = selecTool(row.find("td")[3]).text();
+                let numOf4 = selecTool(row.find("td")[5]).text();
+                let numOf6 = selecTool(row.find("td")[6]).text();
+                let sr = selecTool(row.find("td")[7]).text();
 
-                
+                console.log(
+                    `${playerName} | ${runs} | ${balls} | ${numOf4} | ${numOf6} | ${sr} `
+                );
+                console.log("--------------------------------------------");
             }
         }
     }
-    console.log(htmlString);
 }
 
 module.exports = {
