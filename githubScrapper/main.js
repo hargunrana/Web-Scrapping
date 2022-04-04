@@ -23,16 +23,23 @@ function handleHtml(html) {
     let topics = selecTool(
         ".col-lg-9.position-relative.pr-lg-5.mb-6.mr-lg-5 div .flex-column"
     );
+    let topicName = selecTool(
+        ".col-lg-9.position-relative.pr-lg-5.mb-6.mr-lg-5 div .flex-column>.f3"
+    );
+
     for (let i = 0; i < 3; i++) {
         // console.log("relative-link:", selecTool(topics[i]).attr("href"));
 
+        console.log("Topic Name: ", selecTool(topicName[i]).text());
+
         let relativeLink = selecTool(topics[i]).attr("href");
         let finalLink = "https://github.com" + relativeLink;
-        
-        console.log(selecTool(topics[i]).text());
+
+        // console.log(selecTool(topics[i]).text());
 
         getProjects(finalLink);
+        // console.log("\n");
 
-        break;
+        //break;
     }
 }
